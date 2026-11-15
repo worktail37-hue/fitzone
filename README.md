@@ -22,6 +22,51 @@ A single-page, multi-section performance gym website built with **React 19**, **
 
 ---
 
+## Deployment (Vercel)
+
+`vercel.json` is included:
+
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+```
+
+Import the repo on Vercel and deploy — no other configuration needed. `netlify.toml` and `public/_redirects` provide the same behaviour if you deploy to Netlify instead.
+
+### Environment variables
+
+All optional, all public-safe (`VITE_` values are visible in the browser — never put a secret here):
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `VITE_SITE_NAME` | `FITZONE` | Public display name |
+| `VITE_APP_URL` | – | Public base URL, used for canonical links |
+| `VITE_SUPPORT_EMAIL` | `concierge@fitzone.club` | Contact email shown in the UI |
+| `VITE_FORM_ENDPOINT` | – | HTTPS endpoint for free-trial submissions; empty = simulated demo handler |
+
+---
+
+## Project structure
+
+```
+src/
+  sections/        Hero, About, Services, WhyChooseUs, Trainers, Plans,
+                   Locations, Gallery, Testimonials, FAQ, Contact, CTA
+  components/      Navbar, Footer, ScrollProgressBar, ErrorBoundary, OwnerConsole, ui/
+  hooks/           Shared behaviour (scroll, media queries, etc.)
+  lib/env.ts       Typed environment access with defaults
+  data/            Site content: plans, trainers, testimonials, locations, FAQ
+  index.css        Tailwind v4 entry and design tokens
+public/            Images, video, icons, robots.txt, sitemap.xml, _redirects
+vercel.json        Build + SPA rewrite config for Vercel
+netlify.toml       Equivalent config for Netlify
+```
+
+---
+
 ## Development & Build
 
 ```bash
