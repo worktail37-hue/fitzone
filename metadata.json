@@ -1,0 +1,6 @@
+{
+  "name": "FITZONE — High-Performance Gym & Training Club",
+  "description": "FITZONE is a premier strength, conditioning, and performance training club built for athletes and everyday lifters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

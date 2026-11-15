@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-midnight: #0B1220;
+  --color-slate-navy: #16203A;
+  --color-signal: #D62839;
+  --color-signal-hover: #B81F2F;
+  --color-cloud: #F1F5F9;
+  --color-cloud-muted: rgba(241, 245, 249, 0.7);
+  --color-cloud-border: rgba(241, 245, 249, 0.09);
+  --color-signal-surface: rgba(214, 40, 57, 0.14);
+  --color-signal-border: rgba(214, 40, 57, 0.35);
+  --color-error-text: #FF6B7A;
+  --shadow-signal-glow: 0 0 24px rgba(214, 40, 57, 0.4);
+
+  --font-heading: "Montserrat", system-ui, -apple-system, sans-serif;
+  --font-body: "Poppins", system-ui, -apple-system, sans-serif;
+
+  --text-fluid-display: clamp(2.25rem, 5vw + 1rem, 4.25rem);
+  --text-fluid-h2: clamp(1.75rem, 3.2vw + 0.75rem, 3rem);
+  --text-fluid-h3: clamp(1.25rem, 1.8vw + 0.5rem, 1.625rem);
+  --text-fluid-body-lg: clamp(1.025rem, 0.5vw + 0.9rem, 1.1875rem);
+  --text-fluid-body: clamp(0.9375rem, 0.25vw + 0.875rem, 1rem);
+}
+
+@theme {
+  --color-midnight: var(--color-midnight);
+  --color-slate-navy: var(--color-slate-navy);
+  --color-signal: var(--color-signal);
+  --color-signal-hover: var(--color-signal-hover);
+  --color-cloud: var(--color-cloud);
+  --color-cloud-muted: var(--color-cloud-muted);
+  --color-cloud-border: var(--color-cloud-border);
+  --color-signal-surface: var(--color-signal-surface);
+  --color-signal-border: var(--color-signal-border);
+  --color-error-text: var(--color-error-text);
+
+  /* shadcn semantic tokens mapped to FITZONE palette */
+  --color-background: var(--color-midnight);
+  --color-foreground: var(--color-cloud);
+  --color-card: var(--color-slate-navy);
+  --color-card-foreground: var(--color-cloud);
+  --color-secondary: var(--color-midnight);
+  --color-secondary-foreground: var(--color-cloud);
+  --color-muted: var(--color-midnight);
+  --color-muted-foreground: var(--color-cloud-muted);
+  --color-ring: var(--color-signal);
+
+  --font-display: var(--font-heading);
+  --font-sans: var(--font-body);
+
+  --shadow-signal-glow: var(--shadow-signal-glow);
+}
+
+@layer base {
+  html {
+    background-color: var(--color-midnight);
+    color: var(--color-cloud);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-midnight);
+    color: var(--color-cloud);
+    font-size: var(--text-fluid-body);
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: var(--color-cloud);
+  }
+
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+}
+
+@layer utilities {
+  .text-fluid-display {
+    font-size: var(--text-fluid-display);
+  }
+  .text-fluid-h2 {
+    font-size: var(--text-fluid-h2);
+  }
+  .text-fluid-h3 {
+    font-size: var(--text-fluid-h3);
+  }
+  .text-fluid-body-lg {
+    font-size: var(--text-fluid-body-lg);
+  }
+  .text-fluid-body {
+    font-size: var(--text-fluid-body);
+  }
+}
+
+@keyframes fitzone-marker-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.marker-pulse-ring {
+  animation: fitzone-marker-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.map-pulse-paused .marker-pulse-ring {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
