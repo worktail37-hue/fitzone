@@ -46,7 +46,15 @@ export function isOwnerPrivateHost(): boolean {
     return false;
   }
 
-  // Enable owner functions ONLY on the `/owner` route (or `?portal=owner`)
+  // Owner UI is only *hidden* here, never secured: anyone can type /owner or
+  // ?portal=owner. Treat this as presentation only, and additionally require the
+  // deploy-time flag VITE_OWNER_PORTAL=1 so a production build can keep it off
+  // entirely. Real authorisation must happen on the server / in Firestore rules.
+  const ownerPortalEnabled = String(import.meta.env.VITE_OWNER_PORTAL || '').trim() === '1';
+  if (!ownerPortalEnabled) {
+    return false;
+  }
+
   if (pathname === '/owner' || pathname.startsWith('/owner/')) {
     return true;
   }
